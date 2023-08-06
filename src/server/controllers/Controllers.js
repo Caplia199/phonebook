@@ -6,11 +6,18 @@ class number {
         return res.json(allNumber.rows)
     };
     async postNumber(req, res) {
-        const {code, number} = req.body;
+        const { code, number } = req.body;
         console.log(req.body);
-        const newNumber = await db.query('INSERT INTO phone_number (code, number) VALUES ($1, $2);', [code, number])
-        res.json('Added number: ' + code + ' ' + number)
-    };
+    
+        // const existingNumber = await db.query('SELECT * FROM phone_number WHERE code = $1 AND number = $2;', [code, number]);
+    
+        // if (existingNumber.rows.length > 0) {
+        //   return res.status(400).json('Номер уже есть в базе!');
+        // }
+    
+        const newNumber = await db.query('INSERT INTO phone_number (code, number) VALUES ($1, $2);', [code, number]);
+        return res.json('Added number: ' + code + ' ' + number);
+    }
     async deleteNumber(req, res) {
         const id = req.params.id;
         console.log('deleted');

@@ -4,7 +4,7 @@ psql -p 5432 -h localhost -U postgres phone_nimber
 
 Пароль: postgres
 
-Запуск сервера: node Server.js
+Запуск сервера: cd public && node Server.js
 
 # Getting Started with Create React App
 
