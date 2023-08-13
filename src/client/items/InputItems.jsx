@@ -22,15 +22,13 @@ export const useInputLogic = () => {
     setInput(inputValue);
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const handleSubmit = () => {
     postNumber({
       code: `${value}`,
       number: `${input}`
     });
     setItems([...items, `+${value} ${input}`]);
   };
-
   const isInputValid = input.length >= 3;
 
   return {

@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import PropTypes from 'prop-types';
 import Context from './Context';
 import '../styles/List.css';
 import deleteNumber from '../api/deleteNumber';
@@ -13,7 +12,7 @@ function Items({ value, index }) {
   };
 
   return (
-    <li className="item-li">
+    <li className="item-li" key={value.id}>
       <span>
         <strong>{index + 1}</strong>
         {'+' + value.code + ' ' + value.number}
@@ -23,9 +22,5 @@ function Items({ value, index }) {
   );
 }
 
-Items.propTypes = {
-  value: PropTypes.object.isRequired,
-  index: PropTypes.number,
-};
 
 export default Items;

@@ -2,6 +2,8 @@ import React from 'react';
 import { Button, TextField, Select } from '@mui/material';
 import { useInputLogic } from './items/InputItems';
 import { MenuItem } from '@mui/material';
+import store from './redux/store';
+import { action_1 } from './redux/actions';
 
 const Input = () => {
   const {
@@ -14,9 +16,20 @@ const Input = () => {
     validationError,
   } = useInputLogic();
 
+  const handleSaveClick = () => {
+    if (isInputValid) {
+      handleSubmit(); 
+      const numberToAdd = {
+        code: value,
+        number: input,
+      };
+      store.dispatch(action_1(numberToAdd)); 
+    }
+  };
+
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={(e) => e.preventDefault()}>
         <Select code="code" value={value} onChange={handleChangeCode}>
           <MenuItem value={7}>+7</MenuItem>
           <MenuItem value={90}>+90</MenuItem>
@@ -25,13 +38,19 @@ const Input = () => {
         <TextField
           label="Введите номер телефона:"
           variant="filled"
-          nimber="nimber"
+          name="number"
           value={input}
           onChange={handleChangeNumber}
           error={!!validationError}
           helperText={validationError || ''}
         />
-        <Button style={{ height: '56px' }} variant="contained" type="submit" disabled={!isInputValid}>
+        <Button
+          style={{ height: '56px' }}
+          variant="contained"
+          type="button"
+          disabled={!isInputValid}
+          onClick={handleSaveClick}
+        >
           Сохранить
         </Button>
       </form>
@@ -40,6 +59,3 @@ const Input = () => {
 };
 
 export default Input;
-
-
-
