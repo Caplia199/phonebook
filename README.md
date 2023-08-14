@@ -1,10 +1,13 @@
+Запуск фронта: npm start
+
+Запуск сервера: cd public && node Server.js
+
 Подключиться к бд:
 
 psql -p 5432 -h localhost -U postgres phone_nimber
 
 Пароль: postgres
 
-Запуск сервера: cd public && node Server.js
 
 # Getting Started with Create React App
 
