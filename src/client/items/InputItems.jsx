@@ -28,6 +28,8 @@ export const useInputLogic = () => {
       number: `${input}`
     });
     setItems([...items, `+${value} ${input}`]);
+    
+    setInput('');
   };
   const isInputValid = input.length >= 3;
 
