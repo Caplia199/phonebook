@@ -1,9 +1,17 @@
-function deleteNumber(id) {
-    fetch(`http://localhost:3001/api/${id}`,{
-        method: "DELETE",
-    })
-    .then((res) => res.text())    
-    .then(res => console.log(res)) 
-  };
+async function deleteNumber(id) {
+  try {
+    const response = await fetch(`http://localhost:3001/api/${id}`, {
+      method: "DELETE",
+    });
 
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+
+    const textResponse = await response.text();
+    console.log(textResponse);
+  } catch (error) {
+    console.error('Error deleting data: ' + error.message);
+  }
+}
 module.exports = deleteNumber;

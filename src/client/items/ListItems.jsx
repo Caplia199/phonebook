@@ -1,14 +1,9 @@
-import React, { useContext } from 'react';
-import Context from './Context';
+import React from 'react';
 import '../styles/List.css';
-import deleteNumber from '../api/deleteNumber';
 
-function Items({ value, index }) {
-  const { remove } = useContext(Context);
-
+function Items({ value, index, onChange, onRemove }) {
   const handleDelete = async (id) => {
-    await deleteNumber(id);
-    remove(id);
+    await onRemove(id);
   };
 
   return (
@@ -21,6 +16,5 @@ function Items({ value, index }) {
     </li>
   );
 }
-
 
 export default Items;

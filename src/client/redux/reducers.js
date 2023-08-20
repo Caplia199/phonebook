@@ -10,13 +10,13 @@ function reducer(state = initialState, action) {
       case ADD_NUMBER:
         return {
           ...state,
-          numbers: [action.payload, ...state.numbers], 
+          numbers: [ ...state.numbers, action.payload ], 
         };
   
       case REMOVE_NUMBER:
         return {
           ...state,
-          numbers: state.numbers.slice(0, state.numbers.length - 1),
+        numbers: state.numbers.filter((number) => number.id !== action.payload),
         };
   
       default:

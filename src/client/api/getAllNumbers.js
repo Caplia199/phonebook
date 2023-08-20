@@ -1,12 +1,15 @@
-// function fetchData() {
-//     fetch('http://localhost:3001/api/get')
-//       .then(response => response.json())
-//       .then(data => {
-//         setValue(data);
-//         // data[0].code and data[0].number
-//       })
-//       .catch(error => {
-//         console.error('Error fetching data:', error);
-//       });
-//   }
-// export default fetchData;
+async function getAllNumbers() {
+    try {
+      const response = await fetch('http://localhost:3001/api/get');
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error('Error fetching data: ' + error.message);
+      return [];
+    }
+  };
+
+module.exports = getAllNumbers;

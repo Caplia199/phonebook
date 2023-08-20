@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import List from './client/List';
-import Context from './client/items/Context';
 import Input from './client/InputNumber';
+import deleteNumber from './client/api/deleteNumber';
+import getAllNumbers from './client/api/getAllNumbers';
 
 function App() {
   const [value, setValue] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:3001/api/get')
-      .then((response) => response.json())
+    getAllNumbers()
       .then((data) => {
         setValue(data);
       });
@@ -26,6 +26,7 @@ function App() {
   };
 
   const remove = (id) => {
+    deleteNumber(id);
     setValue((prevValue) => prevValue.filter((val) => val.id !== id));
   };
 
@@ -34,13 +35,11 @@ function App() {
   };
 
   return (
-    <Context.Provider value={{ remove }}>
-      <div className="wrapper">
-        <h1>Справочник</h1>
-        <Input onValueChange={handleValueChange} />
-        {value.length ? <List value={value} onToggle={toggleList} /> : <p>Номеров нет</p>}
-      </div>
-    </Context.Provider>
+    <div className="wrapper">
+      <h1>Справочник</h1>
+      <Input onValueChange={handleValueChange} />
+      {value.length ? <List value={value} onToggle={toggleList} onRemove={remove} /> : <p>Номеров нет</p>}
+    </div>
   );
 }
 
