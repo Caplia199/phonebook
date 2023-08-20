@@ -1,13 +1,13 @@
 import React from 'react';
 import '../styles/List.css';
 
-function Items({ value, index, onChange, onRemove }) {
+function Items({ value, index, onRemove }) {
   const handleDelete = async (id) => {
     await onRemove(id);
   };
 
   return (
-    <li className="item-li" key={value.id}>
+    <li className="item-li">
       <span>
         <strong>{index + 1}</strong>
         {'+' + value.code + ' ' + value.number}

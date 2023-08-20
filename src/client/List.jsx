@@ -10,7 +10,13 @@ function List(props) {
     <ul>
       {combinedValue.length > 0 ? (
         combinedValue.map((value, index) => (
-          <Items value={value} key={value.id} index={index} onChange={props.onToggle} onRemove={props.onRemove} />
+          <Items 
+          value={value} 
+          key={value.id} 
+          index={index} 
+          onChange={props.onToggle} 
+          onRemove={props.onRemove} 
+          />
         ))
       ) : (
         <p>Номеров нет</p>

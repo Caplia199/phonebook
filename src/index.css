@@ -5,10 +5,17 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #ece4fa;
+  padding-top: 40px;
 }
 
 .wrapper {
   padding-top: 5rem;
   margin: 0 auto;
   width: 600px;
+  background-color: #ffffff; /* Фоновый цвет */
+  border-radius: 8px; /* Скругление углов */
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Тень */
+  padding: 2rem;
 }
+

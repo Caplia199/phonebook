@@ -5,6 +5,7 @@ export const useInputLogic = () => {
   const [input, setInput] = useState('');
   const [items, setItems] = useState([]);
   const [value, setValue] = useState(7);
+  const [idCounter, setIdCounter] = useState(15);
 
   const handleChangeCode = (event) => {
     setValue(event.target.value);
@@ -23,7 +24,12 @@ export const useInputLogic = () => {
   };
 
   const handleSubmit = () => {
+
+    const newId = idCounter;
+    setIdCounter(idCounter + 1);
+
     postNumber({
+      id: newId,
       code: `${value}`,
       number: `${input}`
     });
@@ -44,5 +50,6 @@ export const useInputLogic = () => {
     handleChangeNumber,
     handleSubmit,
     isInputValid,
+    idCounter
   };
 };

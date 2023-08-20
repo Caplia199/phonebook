@@ -16,7 +16,7 @@ class number {
         // }
     
         const newNumber = await db.query('INSERT INTO phone_number (code, number) VALUES ($1, $2);', [code, number]);
-        return res.json('Added number: ' + code + ' ' + number);
+        return res.json(`Added number: +${code} ${number}`);
     }
     async deleteNumber(req, res) {
         const id = req.params.id;
