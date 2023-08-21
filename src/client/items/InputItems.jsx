@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import postNumber from '../api/addNumber';
 
 export const useInputLogic = () => {
@@ -6,6 +6,20 @@ export const useInputLogic = () => {
   const [items, setItems] = useState([]);
   const [value, setValue] = useState(7);
   const [idCounter, setIdCounter] = useState(15);
+
+  async function getMaxId() {
+    const response = await fetch('http://localhost:3002/api/get');
+  
+    const data = await response.json();
+    let maxID = data[data.length - 1].id;
+    return maxID;
+  }
+
+  useEffect(() => {
+    getMaxId().then((maxId) => {
+      setIdCounter(maxId + 1);
+    });
+  }, []);
 
   const handleChangeCode = (event) => {
     setValue(event.target.value);
@@ -23,20 +37,25 @@ export const useInputLogic = () => {
     setInput(inputValue);
   };
 
-  const handleSubmit = () => {
-
+  const handleSubmit = async () => {
     const newId = idCounter;
-    setIdCounter(idCounter + 1);
 
-    postNumber({
-      id: newId,
-      code: `${value}`,
-      number: `${input}`
-    });
-    setItems([...items, `+${value} ${input}`]);
-    
-    setInput('');
+    try {
+      await postNumber({
+        id: newId,
+        code: `${value}`,
+        number: `${input}`,
+      });
+
+      setItems([...items, `+${value} ${input}`]);
+      setInput('');
+      
+      setIdCounter((prevId) => prevId + 1);
+    } catch (error) {
+      console.error('Error sending data: ' + error.message);
+    }
   };
+
   const isInputValid = input.length >= 3;
 
   return {
@@ -50,6 +69,6 @@ export const useInputLogic = () => {
     handleChangeNumber,
     handleSubmit,
     isInputValid,
-    idCounter
+    idCounter,
   };
 };

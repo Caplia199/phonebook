@@ -1,6 +1,6 @@
 async function getAllNumbers() {
     try {
-      const response = await fetch('http://localhost:3001/api/get');
+      const response = await fetch('http://localhost:3002/api/get');
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }

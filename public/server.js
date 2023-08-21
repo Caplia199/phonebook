@@ -3,7 +3,7 @@ const server = require('../config');
 const cors = require('cors');
 const router = require('../src/server/routes/routes');
 
-const PORT = server.PORT || 3001;
+const PORT = server.PORT || 3002;
 
 const app = express();
 
@@ -30,7 +30,7 @@ start();
 // const router = require('../src/server/routes/routes');
 // const { setupSocket } = require('../src/server/soket/socket'); 
 
-// const PORT = process.env.PORT || 3001;
+// const PORT = process.env.PORT || 3002;
 // const app = express();
 
 // app.use(cors());

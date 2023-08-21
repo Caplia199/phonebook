@@ -3,6 +3,7 @@ import List from './client/List';
 import Input from './client/InputNumber';
 import deleteNumber from './client/api/deleteNumber';
 import getAllNumbers from './client/api/getAllNumbers';
+import { removeNumber } from './client/redux/actions';
 
 function App() {
   const [value, setValue] = useState([]);
@@ -25,9 +26,21 @@ function App() {
     );
   };
 
-  const remove = (id) => {
-    deleteNumber(id);
-    setValue((prevValue) => prevValue.filter((val) => val.id !== id));
+  const remove = async (id, idCounter) => {
+    try {
+      // Отправляем DELETE-запрос на сервер
+      await deleteNumber(id);
+      // Удаляем элемент из Redux-состояния
+      removeNumber(id);
+      // Удаляем элемент из списка на фронтенде
+      setValue((prevValue) => prevValue.filter((val) => val.id !== id));
+  
+      // Теперь вы можете использовать idCounter по вашему усмотрению
+      console.log('idCounter:', idCounter);
+    } catch (error) {
+      // Обработка ошибок при удалении
+      console.error("Ошибка при удалении элемента: ", error);
+    }
   };
 
   const handleValueChange = (newValue) => {

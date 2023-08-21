@@ -1,7 +1,7 @@
 import React from 'react';
 import '../styles/List.css';
 
-function Items({ value, index, onRemove }) {
+function Items({ value, index, onRemove,  }) {
   const handleDelete = async (id) => {
     await onRemove(id);
   };

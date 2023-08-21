@@ -14,12 +14,12 @@ const Input = () => {
     handleSubmit,
     isInputValid,
     validationError,
-    idCounter
+    idCounter,
   } = useInputLogic();
 
-  const handleSaveClick = () => {
+  const handleSaveClick = async () => {
     if (isInputValid) {
-      handleSubmit(); 
+      await handleSubmit(); 
       const numberToAdd = {
         id: idCounter,
         code: value,

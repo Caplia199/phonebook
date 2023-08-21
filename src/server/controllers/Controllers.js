@@ -6,7 +6,7 @@ class number {
         return res.json(allNumber.rows)
     };
     async postNumber(req, res) {
-        const { code, number } = req.body;
+        const { id, code, number } = req.body;
         console.log(req.body);
     
         // const existingNumber = await db.query('SELECT * FROM phone_number WHERE code = $1 AND number = $2;', [code, number]);
@@ -15,8 +15,9 @@ class number {
         //   return res.status(400).json('Номер уже есть в базе!');
         // }
     
-        const newNumber = await db.query('INSERT INTO phone_number (code, number) VALUES ($1, $2);', [code, number]);
+        const newNumber = await db.query('INSERT INTO phone_number (id, code, number) VALUES ($1, $2, $3);', [id, code, number]);
         return res.json(`Added number: +${code} ${number}`);
+        
     }
     async deleteNumber(req, res) {
         const id = req.params.id;

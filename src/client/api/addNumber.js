@@ -1,6 +1,6 @@
 async function postNumber(item) {
   try {
-    const response = await fetch("http://localhost:3001/api", {
+    const response = await fetch("http://localhost:3002/api", {
       method: "POST",
       mode: 'cors',
       headers: {

@@ -1,6 +1,6 @@
 
 const server = {
-    PORT: 3001,
+    PORT: 3002,
 };
 
 module.exports = server ;

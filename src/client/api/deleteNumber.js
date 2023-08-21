@@ -1,6 +1,6 @@
 async function deleteNumber(id) {
   try {
-    const response = await fetch(`http://localhost:3001/api/${id}`, {
+    const response = await fetch(`http://localhost:3002/api/${id}`, {
       method: "DELETE",
     });
 

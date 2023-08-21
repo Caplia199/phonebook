@@ -16,6 +16,7 @@ function List(props) {
           index={index} 
           onChange={props.onToggle} 
           onRemove={props.onRemove} 
+          idCounter={props.idCounter}
           />
         ))
       ) : (
