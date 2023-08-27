@@ -31,6 +31,7 @@ start();
 // const { setupSocket } = require('../src/server/soket/socket'); 
 
 // const PORT = process.env.PORT || 3002;
+
 // const app = express();
 
 // app.use(cors());
@@ -49,11 +50,6 @@ start();
 // });
 
 // setupSocket(io);
-
-
-
-
-
 
 
 

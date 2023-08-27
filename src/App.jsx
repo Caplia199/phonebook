@@ -6,6 +6,7 @@ import getAllNumbers from './client/api/getAllNumbers';
 import { removeNumber } from './client/redux/actions';
 
 function App() {
+
   const [value, setValue] = useState([]);
 
   useEffect(() => {
@@ -28,17 +29,12 @@ function App() {
 
   const remove = async (id, idCounter) => {
     try {
-      // Отправляем DELETE-запрос на сервер
       await deleteNumber(id);
-      // Удаляем элемент из Redux-состояния
       removeNumber(id);
-      // Удаляем элемент из списка на фронтенде
       setValue((prevValue) => prevValue.filter((val) => val.id !== id));
   
-      // Теперь вы можете использовать idCounter по вашему усмотрению
       console.log('idCounter:', idCounter);
     } catch (error) {
-      // Обработка ошибок при удалении
       console.error("Ошибка при удалении элемента: ", error);
     }
   };
