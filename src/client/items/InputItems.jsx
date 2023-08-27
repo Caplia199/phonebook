@@ -1,11 +1,24 @@
 import { useState, useEffect } from 'react';
-import postNumber from '../api/addNumber';
 
 export const useInputLogic = () => {
   const [input, setInput] = useState('');
-  const [items, setItems] = useState([]);
   const [value, setValue] = useState(7);
-  const [idCounter, setIdCounter] = useState(15);
+  const [items, setItems] = useState([]);
+  const [idCounter, setIdCounter] = useState(1);
+  const [ws, setWs] = useState(null);
+
+  useEffect(() => {
+    const newWs = new WebSocket('ws://localhost:3002'); 
+    setWs(newWs);
+
+    newWs.onopen = () => {
+      console.log('WebSocket connected');
+    };
+
+    return () => {
+      newWs.close();
+    };
+  }, []);
 
   async function getMaxId() {
     const response = await fetch('http://localhost:3002/api/get');
@@ -37,19 +50,25 @@ export const useInputLogic = () => {
     setInput(inputValue);
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = () => {
     const newId = idCounter;
 
     try {
-      await postNumber({
-        id: newId,
-        code: `${value}`,
-        number: `${input}`,
-      });
+      if (ws && ws.readyState === WebSocket.OPEN) {
+        const message = JSON.stringify({
+          type: 'newNumber',
+          data: {
+            id: newId,
+            code: `${value}`,
+            number: `${input}`,
+          },
+        });
+        ws.send(message);
+      } else {
+        console.error('WebSocket connection not open');
+      }
 
-      setItems([...items, `+${value} ${input}`]);
       setInput('');
-      
       setIdCounter((prevId) => prevId + 1);
     } catch (error) {
       console.error('Error sending data: ' + error.message);
