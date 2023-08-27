@@ -6,6 +6,7 @@ export function action_1(value) {
         type: ADD_NUMBER,
         payload: value
     };
+<<<<<<< HEAD
 };
 
 export function removeNumber(id) {
@@ -14,3 +15,14 @@ export function removeNumber(id) {
     payload: id,
   };
 };
+=======
+}
+
+export function removeNumberAction(id) {
+    return {
+      type: REMOVE_NUMBER,
+      payload: id,
+    };
+  }
+
+>>>>>>> 546173d (Fix redux)
